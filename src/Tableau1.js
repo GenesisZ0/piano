@@ -124,7 +124,7 @@ this.first_plan()
 
    mon2() {
 
-       let mon = this.add.image(0,300,'mon').setOrigin(0,0)
+       let mon = this.add.image(0,270,'mon').setOrigin(0,0)
        mon.setScale(0.08)
        this.tweens.add({
            targets: mon,

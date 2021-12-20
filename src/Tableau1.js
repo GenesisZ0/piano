@@ -25,10 +25,10 @@ class Tableau1 extends Phaser.Scene{
         this.load.image("frog","assets/grenouille/frog.png")
         this.load.image("fleur","assets/Fleur/fleur.png")
         this.loadFrames("filterPluie",3,"assets/level/weather/rain/frame")
-
-
+        this.load.audio('mood', ["assets/song/cd.mp3"]);
     }
 // Optimisation  du preload d'anim
+
     loadFrames(prefix,length,baseUrl) {
         for (let i = 1; i <= length; i++) {
             this.load.image(prefix + i, baseUrl + i + '.png')
@@ -48,7 +48,8 @@ class Tableau1 extends Phaser.Scene{
         bgAnimationB.setAlpha(0.6)
 
 
-
+        let musiquebg=this.sound.add("mood")
+musiquebg.play();
 
 
         let water = this.add.image(0,300,'eau').setOrigin(0,0)

@@ -4,6 +4,7 @@ var tilesprite;
 
 class Tableau1 extends Phaser.Scene{
 
+    //je preload les assets
     preload() {
         this.load.image('bg-lune', 'assets/Lune/Lune.png');
         this.load.image('bg-Dlune', 'assets/Lune/DLune.png');
@@ -27,7 +28,7 @@ class Tableau1 extends Phaser.Scene{
 
 
     }
-
+// Optimisation  du preload d'anim
     loadFrames(prefix,length,baseUrl) {
         for (let i = 1; i <= length; i++) {
             this.load.image(prefix + i, baseUrl + i + '.png')
@@ -36,7 +37,7 @@ class Tableau1 extends Phaser.Scene{
 
     create(){
 
-
+// la je met le decor qui "bouge pas"
 
         let bgAnimationA=this.add.sprite(0,0, 'ciel').setOrigin(0,0);
         bgAnimationA.setScale(0.5       )
@@ -58,7 +59,6 @@ class Tableau1 extends Phaser.Scene{
         let moove = this.add.image(0,300,'meau').setOrigin(0,0)
         moove.setScale((-2,1.6))
         moove.setAlpha(0.1)
-        //--------------background 1 (gris) --------------------
 
         let lune = this.add.image(200,-30,'bg-lune').setOrigin(0,0)
         lune.setScale(0.3)
@@ -81,7 +81,7 @@ class Tableau1 extends Phaser.Scene{
         lunemesci.setScale(5,1)
         lunemesci.setAlpha(0.4)
 
-
+    //Ajouts d'un effet de lumiere sur la lune
         this.lights.enable();
         this.lights.setAmbientColor(0x808080);
         this.first_plan()
@@ -102,6 +102,7 @@ class Tableau1 extends Phaser.Scene{
         this.vent.setScale(4,4)
         this.vent.setVisible(false)
 
+        //Gerer l'intensité de la lumiére
         var spotlight = this.lights.addLight(487, 0, 1000).setIntensity(4);
 
 
@@ -109,12 +110,11 @@ class Tableau1 extends Phaser.Scene{
         this.speed=0;
         //initialise ce qui se passe avec le clavier
         this.initKeyboard();
-        // Définit l'espace de déplacement de la caméra
-        this.cameras.main.setBounds(0, 0, 2000, 540);
-        //définit à quelles vitesse se déplacent nos différents plans
-        bgAnimationA.scrollFactorX=0;
+
 
     }
+
+    //On crée plein de fonction  qui prenne en compte les images qui bouge avec les tween
     animB (){
         let image3 = this.add.image(1200, 300, 'boat3');
         let image4 = this.add.image(1200, 342, 'boat3');
@@ -220,6 +220,8 @@ frog(){
 
 }
     boat2 (){
+
+        // on vas crée un bateau avec plusieur tween pour donner un effet de ramage
         let image = this.add.image(0, 300, 'boat');
         let image2 = this.add.image(0, 392, 'boat');
         image2.setScale(0.5)
@@ -259,12 +261,14 @@ frog(){
 
 
         });
+        // On quand on crée le bateau on vas refaire un rocher qui vas se superposé pour le remettre au premier plan
         this.first_plan()
+
     }
 
 
 
-
+// on crée une fonction qui vas venir se mettre au premier plan
 first_plan (){
     let roche = this.add.image(-150,180,'roche').setOrigin(0,0)
     roche.setScale(0.85)
@@ -291,6 +295,7 @@ oiseau(){
 
     initKeyboard(){
         let me=this;
+       //on crée une variable check qui est en boolean pour voir si la touche a déja éte appuyer ou pas    let check = true
         let check = true
         let check2 = true
         let check3 = true
@@ -314,6 +319,7 @@ oiseau(){
                         me.nuage()
                     break;
                 case Phaser.Input.Keyboard.KeyCodes.B:
+                 //on verif si check est a true pour savoir si la touche a deja été appuyé (pour éviter de pouvoir mettre des images a l'infini)
                    if (check == true){
                        me.boat2();
                        check = false

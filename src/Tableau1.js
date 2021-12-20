@@ -5,11 +5,9 @@ var tilesprite;
 class Tableau1 extends Phaser.Scene{
 
     preload() {
-        //bg 2 (tout au fond et très flou)
         this.load.image('bg-lune', 'assets/Lune/Lune.png');
         this.load.image('bg-Dlune', 'assets/Lune/DLune.png');
         this.load.image('g-water', 'assets/level/ground/g-water.png');
-        //texture au fond
         this.load.image('bg-animation-a', 'assets/level/background-2/bg-animation/bg-animation-a.png');
         this.load.image('fish','assets/Poisson/poi.png')
         this.load.image('eau', 'assets/eau/eau.png');
@@ -24,6 +22,7 @@ class Tableau1 extends Phaser.Scene{
         this.load.image("oi","assets/oiseau/oi.png")
         this.load.image("vague","assets/vague/vague.png")
         this.load.image("frog","assets/grenouille/frog.png")
+        this.load.image("fleur","assets/Fleur/fleur.png")
         this.loadFrames("filterPluie",3,"assets/level/weather/rain/frame")
 
 
@@ -48,9 +47,6 @@ class Tableau1 extends Phaser.Scene{
         bgAnimationB.setAlpha(0.6)
 
 
-
-
-        //--------------background 2 (tout au fond et flou)--------------------
 
 
 
@@ -78,11 +74,6 @@ class Tableau1 extends Phaser.Scene{
         let Dlune = this.add.image(200,122,'bg-Dlune').setOrigin(0,0)
         Dlune.setScale(0.3)
         Dlune.setVisible(false)
-
-
-
-
-        //-------------ground (premier plan noir)---------------------------
 
 
 
@@ -159,7 +150,7 @@ class Tableau1 extends Phaser.Scene{
 
     poisson() {
         let visible = 1
-        let poisson2 = this.add.image(100, 1000, 'fish').setOrigin(0, 0)
+        let poisson2 = this.add.image(80, 1000, 'fish').setOrigin(0, 0)
         poisson2.setScale(0.05)
             this.tweens.add({
                 targets: poisson2,
@@ -169,6 +160,19 @@ class Tableau1 extends Phaser.Scene{
                 yoyo: true,
                 flipY: true,
             });
+    }
+
+    fleur(){
+        let fleur = this.add.image(100, 400, 'fleur').setOrigin(0, 0)
+        fleur.setScale(0.05)
+        this.tweens.add({
+            targets: fleur,
+            y: 330,
+            duration: 3000,
+            ease: Phaser.Math.Easing.Sine.InOut,
+        });
+
+
     }
     nuage (){
         let nudge = this.add.image(150,-75,'cloud').setOrigin(0,0)
@@ -287,12 +291,15 @@ oiseau(){
 
     initKeyboard(){
         let me=this;
-       let check = true
-       let check2 = true
+        let check = true
+        let check2 = true
         let check3 = true
         let check4 = true
-       let check5 = true
-       let check6 = true
+        let check5 = true
+        let check6 = true
+        let check7 = true
+
+
         this.input.keyboard.on('keydown', function(kevent)
         {
             switch (kevent.keyCode)
@@ -351,6 +358,14 @@ oiseau(){
                     if (check3 == true){
                         me.mon2()
                         check3 = false
+
+                    }
+                    break;
+
+                case Phaser.Input.Keyboard.KeyCodes.H:
+                    if (check7 == true){
+                        me.fleur()
+                        check7 = false
 
                     }
                     break;

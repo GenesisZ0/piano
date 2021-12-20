@@ -9,7 +9,6 @@ class Tableau1 extends Phaser.Scene{
         this.load.image('bg-lune', 'assets/Lune/Lune.png');
         this.load.image('bg-Dlune', 'assets/Lune/DLune.png');
         this.load.image('g-water', 'assets/level/ground/g-water.png');
-        this.load.image('bg-animation-a', 'assets/level/background-2/bg-animation/bg-animation-a.png');
         this.load.image('fish','assets/Poisson/poi.png')
         this.load.image('eau', 'assets/eau/eau.png');
         this.load.image('meau', 'assets/eau/moove.png');

@@ -21,6 +21,7 @@ class Tableau1 extends Phaser.Scene{
         this.load.image("cloud","assets/nuage/nuage.png")
         this.load.image("roche","assets/Rocher/roche.png")
         this.load.image("mon",'assets/Mongolfier/mongolfier.png')
+        this.load.image("oi","assets/oiseau/oi.png")
 
 
 
@@ -212,7 +213,21 @@ first_plan (){
 }
 
 
+oiseau(){
+    let oi = this.add.image(1000,-50,'oi').setOrigin(0,0)
+    oi.setScale(0.5)
+    let tweens = this.tweens.timeline({
+        tweens: [{
+            targets: oi,
+            x: -1000,
+            ease: 'Power1',
+            duration: 8000,
 
+        }]
+    })
+
+
+}
 
 
     initKeyboard(){
@@ -220,6 +235,7 @@ first_plan (){
        let check = true
        let check2 = true
         let check3 = true
+        let check4 = true
 
         this.input.keyboard.on('keydown', function(kevent)
         {
@@ -250,6 +266,13 @@ first_plan (){
                 case Phaser.Input.Keyboard.KeyCodes.P:
                         me.poisson()
 
+                    break;
+                case Phaser.Input.Keyboard.KeyCodes.O:
+                    if (check4 == true){
+                        me.oiseau()
+                        check4 = false
+
+                    }
                     break;
                 case Phaser.Input.Keyboard.KeyCodes.M:
                     if (check3 == true){

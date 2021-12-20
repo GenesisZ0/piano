@@ -262,7 +262,7 @@ frog(){
 
 
 first_plan (){
-    let roche = this.add.image(-70,180,'roche').setOrigin(0,0)
+    let roche = this.add.image(-150,180,'roche').setOrigin(0,0)
     roche.setScale(0.85)
 
 }
@@ -320,9 +320,9 @@ oiseau(){
                     }
                     break;
                 case Phaser.Input.Keyboard.KeyCodes.F:
-                    if (check5 == true){
+                    if (check6 == true){
                         me.frog()
-                        check5 = false
+                        check6 = false
 
                     }
                     break;

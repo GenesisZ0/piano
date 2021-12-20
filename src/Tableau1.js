@@ -22,6 +22,7 @@ class Tableau1 extends Phaser.Scene{
         this.load.image("roche","assets/Rocher/roche.png")
         this.load.image("mon",'assets/Mongolfier/mongolfier.png')
         this.load.image("oi","assets/oiseau/oi.png")
+        this.load.image("vague","assets/vague/vague.png")
         this.loadFrames("filterPluie",3,"assets/level/weather/rain/frame")
 
 
@@ -179,8 +180,23 @@ class Tableau1 extends Phaser.Scene{
 
     }
 
+    vague(){
+        let vague = this.add.image(0,250,'vague').setOrigin(0,0)
+        let vague2 = this.add.image(-500,250,'vague').setOrigin(0,0)
+        let vague3 = this.add.image(-100,250,'vague').setOrigin(0,0)
+        vague.setScale(0.4)
+        vague2.setScale(0.7)
+        let tweens = this.tweens.timeline({
+            tweens: [{
+                targets: [vague,vague2,vague3],
+                x: 1000,
+                ease: 'Power1',
+                duration: 50000,
 
-
+            }]
+        })
+        this.first_plan()
+}
 
     boat2 (){
         let image = this.add.image(0, 300, 'boat');
@@ -225,6 +241,9 @@ class Tableau1 extends Phaser.Scene{
         this.first_plan()
     }
 
+
+
+
 first_plan (){
     let roche = this.add.image(-70,180,'roche').setOrigin(0,0)
     roche.setScale(0.85)
@@ -255,7 +274,7 @@ oiseau(){
        let check2 = true
         let check3 = true
         let check4 = true
-
+       let check5 = true
         this.input.keyboard.on('keydown', function(kevent)
         {
             switch (kevent.keyCode)
@@ -310,6 +329,13 @@ oiseau(){
 
                     }
                     break;
+                case Phaser.Input.Keyboard.KeyCodes.X:
+                    if (check5 == true){
+                        me.vague()
+                        check5 = false
+
+                    }
+                    break;
             }
         });
         this.input.keyboard.on('keyup', function(kevent)
@@ -328,8 +354,6 @@ oiseau(){
 
 
     update(){
-        //déplacement de la caméra
-        this.cameras.main.scrollX+=this.speed; // on aurait pu écrire : this.cameras.main.scrollX= this.cameras.main.scrollX + this.speed;
 
 
     }

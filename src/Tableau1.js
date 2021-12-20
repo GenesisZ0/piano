@@ -22,12 +22,16 @@ class Tableau1 extends Phaser.Scene{
         this.load.image("roche","assets/Rocher/roche.png")
         this.load.image("mon",'assets/Mongolfier/mongolfier.png')
         this.load.image("oi","assets/oiseau/oi.png")
-
+        this.loadFrames("filterPluie",3,"assets/level/weather/rain/frame")
 
 
     }
 
-
+    loadFrames(prefix,length,baseUrl) {
+        for (let i = 1; i <= length; i++) {
+            this.load.image(prefix + i, baseUrl + i + '.png')
+        }
+    }
 
     create(){
 
@@ -87,12 +91,27 @@ class Tableau1 extends Phaser.Scene{
 
         this.lights.enable();
         this.lights.setAmbientColor(0x808080);
-
-
+        this.first_plan()
+        this.vent = this.add.sprite(-1290, -500, 'filterPluie').setOrigin(0, 0);
+        //animation de 3 images
+        this.anims.create({
+            key: 'pluie',
+            frames: [
+                {key: 'filterPluie1'},
+                {key: 'filterPluie2'},
+                {key: 'filterPluie3'},
+            ],
+            frameRate: 15,
+            repeat: -1
+        });
+        this.vent.play('pluie');
+        this.vent.setVisible(true)
+        this.vent.setScale(4,4)
+        this.vent.setVisible(false)
 
         var spotlight = this.lights.addLight(487, 0, 1000).setIntensity(4);
 
-this.first_plan()
+
 
         this.speed=0;
         //initialise ce qui se passe avec le clavier
@@ -271,6 +290,16 @@ oiseau(){
                     if (check4 == true){
                         me.oiseau()
                         check4 = false
+
+                    }
+                    break;
+                case Phaser.Input.Keyboard.KeyCodes.V:
+                    if (me.vent.visible == true) {
+                        me.vent.setVisible(false)
+
+                    }
+                    else  {
+                        me.vent.visible = true;
 
                     }
                     break;

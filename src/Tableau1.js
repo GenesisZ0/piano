@@ -23,6 +23,7 @@ class Tableau1 extends Phaser.Scene{
         this.load.image("mon",'assets/Mongolfier/mongolfier.png')
         this.load.image("oi","assets/oiseau/oi.png")
         this.load.image("vague","assets/vague/vague.png")
+        this.load.image("frog","assets/grenouille/frog.png")
         this.loadFrames("filterPluie",3,"assets/level/weather/rain/frame")
 
 
@@ -198,6 +199,22 @@ class Tableau1 extends Phaser.Scene{
         this.first_plan()
 }
 
+
+frog(){
+    let frog = this.add.image(500, 1000, 'frog').setOrigin(0, 0)
+    frog.setScale(1)
+    this.tweens.add({
+        targets: frog,
+        y: 100,
+        duration: 6000,
+        ease: Phaser.Math.Easing.Sine.InOut,
+        yoyo : true,
+
+
+    });
+
+
+}
     boat2 (){
         let image = this.add.image(0, 300, 'boat');
         let image2 = this.add.image(0, 392, 'boat');
@@ -275,6 +292,7 @@ oiseau(){
         let check3 = true
         let check4 = true
        let check5 = true
+       let check6 = true
         this.input.keyboard.on('keydown', function(kevent)
         {
             switch (kevent.keyCode)
@@ -298,6 +316,13 @@ oiseau(){
                     if (check2 == true){
                        me.animB()
                        check2 = false
+
+                    }
+                    break;
+                case Phaser.Input.Keyboard.KeyCodes.F:
+                    if (check5 == true){
+                        me.frog()
+                        check5 = false
 
                     }
                     break;
